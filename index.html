@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanditha L — Portfolio | CSE Student at RVCE</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for 3D Canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: {
+                            50: '#fcfbf7',
+                            100: '#f7f4ed',
+                            200: '#efebe0',
+                            300: '#e5decb',
+                        },
+                        sage: {
+                            50: '#f0f3eb',
+                            100: '#e9ece0',
+                            200: '#ced6be',
+                            500: '#708238',
+                            700: '#4e5d28',
+                            800: '#3b471e',
+                            900: '#2b3416',
+                        },
+                        espresso: {
+                            800: '#2b2927',
+                            900: '#1a1918',
+                        },
+                        gold: {
+                            400: '#d4af37',
+                            500: '#c5a059',
+                            600: '#a3803c',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        editorial: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        cursive: ['"Sacramento"', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Fine Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f7f4ed;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ced6be;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #708238;
+        }
+
+        /* Glassmorphism Navigation */
+        .glass-nav {
+            background: rgba(252, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Subtle Gold Shimmer Effect */
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+        }
+
+        /* Smooth Arch Masking for 3D Hero Frame */
+        .arch-container {
+            border-top-left-radius: 200px;
+            border-top-right-radius: 200px;
+        }
+
+        /* Project Card Hover Animation */
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -15px rgba(78, 93, 40, 0.12);
+        }
+
+        /* Modal Overlay Transition */
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-ivory-50 text-espresso-900 font-sans antialiased selection:bg-sage-200 selection:text-sage-900">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav border-b border-sage-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+            <!-- Monogram Logo -->
+            <a href="#home" class="group flex items-center space-x-3 focus:outline-none">
+                <div class="w-10 h-10 rounded-full border border-sage-500/40 flex items-center justify-center bg-ivory-100 group-hover:border-gold-500 transition-colors duration-300">
+                    <span class="font-editorial font-bold text-lg text-sage-800 group-hover:text-gold-600 transition-colors">NL</span>
+                </div>
+                <span class="font-serif text-sm tracking-widest text-espresso-800 uppercase hidden sm:inline-block">Nanditha L</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs tracking-widest font-medium uppercase text-espresso-800/80">
+                <a href="#about" class="hover:text-sage-700 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">About</a>
+                <a href="#skills" class="hover:text-sage-700 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">Skills</a>
+                <a href="#projects" class="hover:text-sage-700 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">Projects</a>
+                <a href="#process" class="hover:text-sage-700 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">Process</a>
+                <a href="#education" class="hover:text-sage-700 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">Education</a>
+                <a href="#goals" class="hover:text-sage-700 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">Goals</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden sm:block">
+                <a href="#contact" class="inline-flex items-center px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-ivory-50 bg-sage-700 hover:bg-sage-800 rounded-full transition-all duration-300 shadow-sm hover:shadow">
+                    Contact Me
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-espresso-800 focus:outline-none p-2" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-ivory-100 border-b border-sage-200 px-8 py-6 space-y-4 text-sm font-medium tracking-wider uppercase">
+            <a href="#about" class="block text-espresso-800 hover:text-sage-700 py-2">About</a>
+            <a href="#skills" class="block text-espresso-800 hover:text-sage-700 py-2">Skills</a>
+            <a href="#projects" class="block text-espresso-800 hover:text-sage-700 py-2">Projects</a>
+            <a href="#process" class="block text-espresso-800 hover:text-sage-700 py-2">Process</a>
+            <a href="#education" class="block text-espresso-800 hover:text-sage-700 py-2">Education</a>
+            <a href="#goals" class="block text-espresso-800 hover:text-sage-700 py-2">Goals</a>
+            <a href="#contact" class="block text-sage-700 font-semibold py-2">Contact Me</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="min-h-screen pt-28 pb-16 md:pt-36 md:pb-24 flex items-center justify-center relative overflow-hidden">
+        <!-- Subtle Ambient Background Decor -->
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-sage-100/50 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-0 w-80 h-80 bg-gold-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            <!-- Left Hero Text Content -->
+            <div class="lg:col-span-7 space-y-6 z-10">
+                <div class="space-y-2">
+                    <p class="font-cursive text-3xl md:text-4xl text-sage-700 tracking-wide">Hello, I'm</p>
+                    <h1 class="font-editorial text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-espresso-900 leading-[0.95]">
+                        NANDITHA L
+                    </h1>
+                </div>
+
+                <div class="inline-flex items-center space-x-3 py-1.5 px-4 bg-sage-100/80 border border-sage-200 rounded-full text-xs font-semibold tracking-widest text-sage-800 uppercase">
+                    <span class="w-2 h-2 rounded-full bg-sage-500 animate-pulse"></span>
+                    <span>CSE Student | RVCE, Bangalore</span>
+                </div>
+
+                <p class="text-base sm:text-lg text-espresso-800/80 font-light leading-relaxed max-w-xl">
+                    A Computer Science & Engineering student at RV College of Engineering passionate about bridging software logic, embedded hardware systems, and modern algorithmic computing to craft practical solutions.
+                </p>
+
+                <!-- Actions -->
+                <div class="pt-4 flex flex-wrap items-center gap-4">
+                    <a href="#projects" class="px-8 py-3.5 bg-sage-700 hover:bg-sage-800 text-ivory-50 text-xs font-semibold uppercase tracking-widest rounded-full transition-all duration-300 shadow-md hover:shadow-lg flex items-center space-x-2">
+                        <span>Explore My Work</span>
+                        <i class="fa-solid fa-arrow-down text-xs"></i>
+                    </a>
+                    <a href="#contact" class="px-8 py-3.5 bg-transparent hover:bg-sage-100 text-espresso-800 border border-espresso-800/20 hover:border-espresso-800 text-xs font-semibold uppercase tracking-widest rounded-full transition-all duration-300">
+                        Contact Me
+                    </a>
+                </div>
+
+                <!-- Quick Metadata -->
+                <div class="pt-6 border-t border-sage-200/60 flex items-center space-x-6 text-xs text-espresso-800/60 font-medium">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-location-dot text-sage-500"></i>
+                        <span>Bangalore, India</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-graduation-cap text-sage-500"></i>
+                        <span>B.E. CSE Student</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hero Interactive 3D Canvas Scene -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="w-full max-w-md aspect-[4/5] arch-container bg-ivory-100 border border-sage-200 p-3 shadow-xl relative overflow-hidden group">
+                    
+                    <!-- Three.js Canvas Container -->
+                    <div id="hero3dCanvas" class="w-full h-full arch-container overflow-hidden bg-gradient-to-b from-ivory-200/50 to-sage-50/60 relative"></div>
+
+                    <!-- Subtle Decorative Overlay Lines -->
+                    <div class="absolute inset-0 border border-gold-500/20 pointer-events-none arch-container m-2"></div>
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-ivory-50/90 backdrop-blur-md px-4 py-2 rounded-full border border-sage-200 text-[10px] uppercase tracking-widest text-sage-800 font-semibold shadow-sm pointer-events-none flex items-center space-x-2">
+                        <i class="fa-solid fa-cube text-gold-500"></i>
+                        <span>Interactive 3D Composition</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MINIMAL INFORMATION STRIP -->
+    <section class="bg-sage-700 text-ivory-50 py-6 border-y border-sage-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-sage-600/50 text-center">
+                <div class="pt-2 md:pt-0 flex items-center justify-center space-x-3">
+                    <i class="fa-solid fa-university text-gold-400 text-lg"></i>
+                    <span class="text-xs uppercase tracking-widest font-medium">RVCE — Bangalore</span>
+                </div>
+                <div class="pt-4 md:pt-0 flex items-center justify-center space-x-3">
+                    <i class="fa-solid fa-laptop-code text-gold-400 text-lg"></i>
+                    <span class="text-xs uppercase tracking-widest font-medium">CSE — Engineering Student</span>
+                </div>
+                <div class="pt-4 md:pt-0 flex items-center justify-center space-x-3">
+                    <i class="fa-solid fa-seedling text-gold-400 text-lg"></i>
+                    <span class="text-xs uppercase tracking-widest font-medium">Building For A Better Tomorrow</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SECTION -->
+    <section id="projects" class="py-24 max-w-7xl mx-auto px-6 md:px-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-sage-200 pb-6">
+            <div>
+                <span class="text-xs uppercase tracking-widest font-semibold text-sage-700 block mb-2">Curated Works</span>
+                <h2 class="font-editorial text-4xl sm:text-5xl font-bold text-espresso-900">Featured Projects</h2>
+            </div>
+            <p class="text-xs text-espresso-800/60 max-w-xs mt-4 md:mt-0 uppercase tracking-wider">
+                Explorations spanning hardware prototypes, IoT systems, modern web apps, and quantum concepts.
+            </p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Project 01 -->
+            <div class="project-card bg-ivory-100 rounded-2xl border border-sage-200/80 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <!-- Visual Header with Image -->
+                    <div class="h-52 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" 
+                             alt="Smart Helmet Hardware & IoT Prototype" 
+                             onerror="this.src='https://placehold.co/800x500/3b471e/fcfbf7?text=Smart+Helmet+IoT'"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso-900/90 via-espresso-900/40 to-transparent p-5 flex flex-col justify-between">
+                            <div class="flex justify-between items-start z-10">
+                                <span class="font-editorial font-bold text-2xl text-gold-400 drop-shadow">01</span>
+                                <span class="px-3 py-1 bg-ivory-50/20 backdrop-blur-md rounded-full text-[10px] text-ivory-50 font-medium uppercase tracking-widest border border-ivory-50/30">Embedded / IoT</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-ivory-100 text-xs font-medium z-10">
+                                <i class="fa-solid fa-microchip text-gold-400"></i>
+                                <span>ESP32 • MPU6050 • GPS • GSM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 space-y-3">
+                        <h3 class="font-serif text-xl font-bold text-espresso-900">Smart Helmet with Secondary Accident Prevention</h3>
+                        <p class="text-xs text-espresso-800/70 leading-relaxed">
+                            Functional hardware prototype utilizing ESP32 to monitor motion vectors, detect sudden impact thresholds via MPU6050, capture GPS coordinates, and dispatch emergency SMS alerts via GSM.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">ESP32</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">MPU6050</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">NEO-6M GPS</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">SIM800L GSM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openProjectModal(1)" class="w-full py-2.5 border border-sage-500/40 hover:bg-sage-700 hover:text-ivory-50 text-sage-800 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>View Project Specs</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 02 -->
+            <div class="project-card bg-ivory-100 rounded-2xl border border-sage-200/80 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <!-- Visual Header with Image -->
+                    <div class="h-52 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80" 
+                             alt="Air Filtration & Sensor Monitoring System" 
+                             onerror="this.src='https://placehold.co/800x500/2b3416/fcfbf7?text=Air+Filtration+System'"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso-900/90 via-espresso-900/40 to-transparent p-5 flex flex-col justify-between">
+                            <div class="flex justify-between items-start z-10">
+                                <span class="font-editorial font-bold text-2xl text-gold-400 drop-shadow">02</span>
+                                <span class="px-3 py-1 bg-ivory-50/20 backdrop-blur-md rounded-full text-[10px] text-ivory-50 font-medium uppercase tracking-widest border border-ivory-50/30">Hardware / Sensors</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-ivory-100 text-xs font-medium z-10">
+                                <i class="fa-solid fa-wind text-gold-400"></i>
+                                <span>Arduino • DHT Sensor • Filtration</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 space-y-3">
+                        <h3 class="font-serif text-xl font-bold text-espresso-900">Air Filtration & Environment Monitor</h3>
+                        <p class="text-xs text-espresso-800/70 leading-relaxed">
+                            Integrated microcontroller setup utilizing Arduino paired with DHT temperature/humidity sensors, air particulate monitoring modules, and active filtration controls.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Arduino Uno</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">DHT11 / DHT22</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Air Quality Sensor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openProjectModal(2)" class="w-full py-2.5 border border-sage-500/40 hover:bg-sage-700 hover:text-ivory-50 text-sage-800 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>View Project Specs</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 03 -->
+            <div class="project-card bg-ivory-100 rounded-2xl border border-sage-200/80 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <!-- Visual Header with Image -->
+                    <div class="h-52 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80" 
+                             alt="Surplus Food Management Platform" 
+                             onerror="this.src='https://placehold.co/800x500/2b2927/fcfbf7?text=Surplus+Food+App'"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso-900/90 via-espresso-900/40 to-transparent p-5 flex flex-col justify-between">
+                            <div class="flex justify-between items-start z-10">
+                                <span class="font-editorial font-bold text-2xl text-gold-400 drop-shadow">03</span>
+                                <span class="px-3 py-1 bg-ivory-50/20 backdrop-blur-md rounded-full text-[10px] text-ivory-50 font-medium uppercase tracking-widest border border-ivory-50/30">Web App / Impact</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-ivory-100 text-xs font-medium z-10">
+                                <i class="fa-solid fa-hand-holding-heart text-gold-400"></i>
+                                <span>Algorithmic NGO Food Dispatch</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 space-y-3">
+                        <h3 class="font-serif text-xl font-bold text-espresso-900">Surplus Food Management System</h3>
+                        <p class="text-xs text-espresso-800/70 leading-relaxed">
+                            Web application prototype engineered to match surplus edible food from events and dining venues with verified local NGOs utilizing priority queue concepts and graph matching.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Python</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">JavaScript</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">HTML5 / CSS3</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Algorithms</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openProjectModal(3)" class="w-full py-2.5 border border-sage-500/40 hover:bg-sage-700 hover:text-ivory-50 text-sage-800 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>View Project Specs</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 04 -->
+            <div class="project-card bg-ivory-100 rounded-2xl border border-sage-200/80 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <!-- Visual Header with Image -->
+                    <div class="h-52 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" 
+                             alt="StudyBud Personal Productivity Suite" 
+                             onerror="this.src='https://placehold.co/800x500/4e5d28/fcfbf7?text=StudyBud+App'"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso-900/90 via-espresso-900/40 to-transparent p-5 flex flex-col justify-between">
+                            <div class="flex justify-between items-start z-10">
+                                <span class="font-editorial font-bold text-2xl text-gold-400 drop-shadow">04</span>
+                                <span class="px-3 py-1 bg-ivory-50/20 backdrop-blur-md rounded-full text-[10px] text-ivory-50 font-medium uppercase tracking-widest border border-ivory-50/30">GUI / Software</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-ivory-100 text-xs font-medium z-10">
+                                <i class="fa-solid fa-clock text-gold-400"></i>
+                                <span>Study Productivity & Focus Timer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 space-y-3">
+                        <h3 class="font-serif text-xl font-bold text-espresso-900">StudyBud & Personal Productivity Suite</h3>
+                        <p class="text-xs text-espresso-800/70 leading-relaxed">
+                            Personal interest application featuring custom study session tracking, pomodoro logic, subject analytics, and lightweight local desktop GUI tools.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Python</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Tkinter</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">JavaScript</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">LocalStorage</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openProjectModal(4)" class="w-full py-2.5 border border-sage-500/40 hover:bg-sage-700 hover:text-ivory-50 text-sage-800 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>View Project Specs</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 05 -->
+            <div class="project-card bg-ivory-100 rounded-2xl border border-sage-200/80 overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-1">
+                <div>
+                    <!-- Visual Header with Image -->
+                    <div class="h-52 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80" 
+                             alt="Quantum Computing & Logic Gate Research" 
+                             onerror="this.src='https://placehold.co/800x500/1a1918/d4af37?text=Quantum+Computing'"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso-900/90 via-espresso-900/40 to-transparent p-5 flex flex-col justify-between">
+                            <div class="flex justify-between items-start z-10">
+                                <span class="font-editorial font-bold text-2xl text-gold-400 drop-shadow">05</span>
+                                <span class="px-3 py-1 bg-ivory-50/20 backdrop-blur-md rounded-full text-[10px] text-ivory-50 font-medium uppercase tracking-widest border border-ivory-50/30">Research / Learning</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-ivory-100 text-xs font-medium z-10">
+                                <i class="fa-solid fa-atom text-gold-400"></i>
+                                <span>Quantum Gates & Qubit Vectors</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-6 space-y-3">
+                        <h3 class="font-serif text-xl font-bold text-espresso-900">Quantum Computing & Algorithmic Logic</h3>
+                        <p class="text-xs text-espresso-800/70 leading-relaxed">
+                            Active study into quantum logic gates, qubit superposition principles, linear algebra applications in computation, and advanced data structure paradigms.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Python</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">C++</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Quantum Mechanics Basics</span>
+                            <span class="px-2.5 py-0.5 bg-ivory-200 text-espresso-800 text-[10px] font-medium rounded-md">Linear Algebra</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openProjectModal(5)" class="w-full py-2.5 border border-sage-500/40 hover:bg-sage-700 hover:text-ivory-50 text-sage-800 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>View Exploration Notes</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SKILLS AND TECHNOLOGIES -->
+    <section id="skills" class="py-20 bg-ivory-100/70 border-y border-sage-200/80">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-xs uppercase tracking-widest font-semibold text-sage-700">Technical Toolkit</span>
+                <h2 class="font-editorial text-4xl sm:text-5xl font-bold text-espresso-900">Skills & Competencies</h2>
+                <p class="text-xs text-espresso-800/70 uppercase tracking-wider">
+                    Core technical skills developed through coursework, practical laboratory setups, and project initiatives.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Skill Card: C/C++ -->
+                <div class="p-6 rounded-2xl bg-ivory-50 border border-sage-200 hover:border-gold-500/50 transition-all duration-300 flex flex-col items-center text-center space-y-3 group">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 group-hover:bg-sage-700 group-hover:text-ivory-50 transition-colors">
+                        <i class="fa-solid fa-code text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base text-espresso-900">C / C++</h4>
+                        <p class="text-[11px] text-espresso-800/60 mt-1">Data Structures & System Logic</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Python -->
+                <div class="p-6 rounded-2xl bg-ivory-50 border border-sage-200 hover:border-gold-500/50 transition-all duration-300 flex flex-col items-center text-center space-y-3 group">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 group-hover:bg-sage-700 group-hover:text-ivory-50 transition-colors">
+                        <i class="fa-brands fa-python text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base text-espresso-900">Python</h4>
+                        <p class="text-[11px] text-espresso-800/60 mt-1">Scripting, Algorithms & Logic</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card: HTML5 & CSS3 -->
+                <div class="p-6 rounded-2xl bg-ivory-50 border border-sage-200 hover:border-gold-500/50 transition-all duration-300 flex flex-col items-center text-center space-y-3 group">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 group-hover:bg-sage-700 group-hover:text-ivory-50 transition-colors">
+                        <i class="fa-brands fa-html5 text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base text-espresso-900">HTML5 & CSS3</h4>
+                        <p class="text-[11px] text-espresso-800/60 mt-1">Responsive Web Interfaces</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card: JavaScript -->
+                <div class="p-6 rounded-2xl bg-ivory-50 border border-sage-200 hover:border-gold-500/50 transition-all duration-300 flex flex-col items-center text-center space-y-3 group">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 group-hover:bg-sage-700 group-hover:text-ivory-50 transition-colors">
+                        <i class="fa-brands fa-js text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base text-espresso-900">JavaScript</h4>
+                        <p class="text-[11px] text-espresso-800/60 mt-1">DOM Logic & Interactivity</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Embedded Hardware -->
+                <div class="p-6 rounded-2xl bg-ivory-50 border border-sage-200 hover:border-gold-500/50 transition-all duration-300 flex flex-col items-center text-center space-y-3 group">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 group-hover:bg-sage-700 group-hover:text-ivory-50 transition-colors">
+                        <i class="fa-solid fa-microchip text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base text-espresso-900">ESP32 & Arduino</h4>
+                        <p class="text-[11px] text-espresso-800/60 mt-1">Microcontroller Interfacing</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Hardware Sensors -->
+                <div class="p-6 rounded-2xl bg-ivory-50 border border-sage-200 hover:border-gold-500/50 transition-all duration-300 flex flex-col items-center text-center space-y-3 group">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 group-hover:bg-sage-700 group-hover:text-ivory-50 transition-colors">
+                        <i class="fa-solid fa-satellite-dish text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base text-espresso-900">GPS & GSM Modules</h4>
+                        <p class="text-[11px] text-espresso-800/60 mt-1">Telemetry & Sensor Communication</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Git & Version Control -->
+                <div class="p-6 rounded-2xl bg-ivory-50 border border-sage-200 hover:border-gold-500/50 transition-all duration-300 flex flex-col items-center text-center space-y-3 group">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 group-hover:bg-sage-700 group-hover:text-ivory-50 transition-colors">
+                        <i class="fa-brands fa-git-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base text-espresso-900">Git & GitHub</h4>
+                        <p class="text-[11px] text-espresso-800/60 mt-1">Version Control & Workflow</p>
+                    </div>
+                </div>
+
+                <!-- Skill Card: Problem Solving -->
+                <div class="p-6 rounded-2xl bg-ivory-50 border border-sage-200 hover:border-gold-500/50 transition-all duration-300 flex flex-col items-center text-center space-y-3 group">
+                    <div class="w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 group-hover:bg-sage-700 group-hover:text-ivory-50 transition-colors">
+                        <i class="fa-solid fa-diagram-project text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-base text-espresso-900">Algorithmic Logic</h4>
+                        <p class="text-[11px] text-espresso-800/60 mt-1">Data Structures & Optimization</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section id="about" class="py-24 max-w-7xl mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Text Bio -->
+            <div class="lg:col-span-7 space-y-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest font-semibold text-sage-700">Biography</span>
+                    <h2 class="font-editorial text-4xl sm:text-5xl font-bold text-espresso-900 mt-2">About Me</h2>
+                </div>
+
+                <div class="space-y-4 text-espresso-800/80 leading-relaxed font-light text-base">
+                    <p>
+                        I’m a Computer Science and Engineering student at <strong class="text-espresso-900 font-semibold">RV College of Engineering (RVCE), Bangalore</strong>. I enjoy exploring software development, hardware-based projects, and emerging technologies, building practical solutions for real-world problems.
+                    </p>
+                    <p>
+                        My academic journey blends core computer science fundamentals—such as Data Structures, Algorithms, and Object-Oriented Design—with hands-on hardware integration using microcontrollers like ESP32 and Arduino.
+                    </p>
+                    <p>
+                        Whether I am implementing telemetry-driven IoT safety systems, designing clean web applications, or analyzing quantum logic concepts, I prioritize structured engineering design, thorough testing, and clean architecture.
+                    </p>
+                </div>
+
+                <!-- Academic Highlight Metrics -->
+                <div class="pt-4 grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-ivory-100 rounded-xl border border-sage-200">
+                        <span class="block font-editorial text-2xl font-bold text-sage-800">8.5 / 10</span>
+                        <span class="text-[11px] uppercase tracking-wider text-espresso-800/70">Current Academic Cumulative</span>
+                    </div>
+                    <div class="p-4 bg-ivory-100 rounded-xl border border-sage-200">
+                        <span class="block font-editorial text-2xl font-bold text-sage-800">Software & IoT</span>
+                        <span class="text-[11px] uppercase tracking-wider text-espresso-800/70">Primary Focus Areas</span>
+                    </div>
+                </div>
+
+                <!-- Signature Visual Line -->
+                <div class="pt-4 flex items-center justify-between border-t border-sage-200">
+                    <span class="font-cursive text-3xl text-sage-800">Nanditha L</span>
+                    <span class="text-xs uppercase tracking-widest text-espresso-800/50">RVCE CSE Department</span>
+                </div>
+            </div>
+
+            <!-- Right Visual Composition Frame -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="w-full max-w-md p-8 bg-ivory-100 border border-sage-200 rounded-3xl relative shadow-lg space-y-6">
+                    <div class="w-12 h-12 rounded-full bg-sage-200/60 flex items-center justify-center text-sage-800">
+                        <i class="fa-solid fa-leaf text-xl"></i>
+                    </div>
+                    <h3 class="font-editorial text-2xl font-bold text-espresso-900">Engineering Philosophy</h3>
+                    <blockquote class="italic text-espresso-800/80 font-editorial text-lg leading-relaxed border-l-2 border-gold-500 pl-4">
+                        "Great technology exists at the convergence of concise code, robust physical engineering, and thoughtful human design."
+                    </blockquote>
+                    <div class="space-y-3 pt-2 text-xs text-espresso-800/70">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-sage-700"></i>
+                            <span>Continuous study of core Computer Science principles</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-sage-700"></i>
+                            <span>Interfacing real-world sensors with microcontroller logic</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-sage-700"></i>
+                            <span>Active engagement in technical ideathons and hackathons</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MY PROCESS -->
+    <section id="process" class="py-20 bg-sage-50/50 border-y border-sage-200/80">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center max-w-xl mx-auto mb-16 space-y-2">
+                <span class="text-xs uppercase tracking-widest font-semibold text-sage-700">Methodology</span>
+                <h2 class="font-editorial text-4xl font-bold text-espresso-900">My Engineering Process</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Step 1 -->
+                <div class="p-6 bg-ivory-50 rounded-2xl border border-sage-200 space-y-3 relative">
+                    <span class="font-editorial text-2xl font-bold text-gold-500 block">01</span>
+                    <h4 class="font-serif font-bold text-lg text-espresso-900">Understand</h4>
+                    <p class="text-xs text-espresso-800/70 leading-relaxed">Deconstruct problem statements, analyze requirements, and define hardware or software constraints.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="p-6 bg-ivory-50 rounded-2xl border border-sage-200 space-y-3 relative">
+                    <span class="font-editorial text-2xl font-bold text-gold-500 block">02</span>
+                    <h4 class="font-serif font-bold text-lg text-espresso-900">Plan</h4>
+                    <p class="text-xs text-espresso-800/70 leading-relaxed">Map algorithmic flows, model circuit diagrams, and design clean software architectures.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="p-6 bg-ivory-50 rounded-2xl border border-sage-200 space-y-3 relative">
+                    <span class="font-editorial text-2xl font-bold text-gold-500 block">03</span>
+                    <h4 class="font-serif font-bold text-lg text-espresso-900">Build</h4>
+                    <p class="text-xs text-espresso-800/70 leading-relaxed">Implement modular code, connect embedded sensors, and assemble physical prototypes.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="p-6 bg-ivory-50 rounded-2xl border border-sage-200 space-y-3 relative">
+                    <span class="font-editorial text-2xl font-bold text-gold-500 block">04</span>
+                    <h4 class="font-serif font-bold text-lg text-espresso-900">Test</h4>
+                    <p class="text-xs text-espresso-800/70 leading-relaxed">Rigorously evaluate circuit thresholds, benchmark response times, and debug edge cases.</p>
+                </div>
+                <!-- Step 5 -->
+                <div class="p-6 bg-ivory-50 rounded-2xl border border-sage-200 space-y-3 relative">
+                    <span class="font-editorial text-2xl font-bold text-gold-500 block">05</span>
+                    <h4 class="font-serif font-bold text-lg text-espresso-900">Improve</h4>
+                    <p class="text-xs text-espresso-800/70 leading-relaxed">Iterate based on test feedback, optimize memory efficiency, and refine user interfaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education" class="py-24 max-w-7xl mx-auto px-6 md:px-12">
+        <div class="max-w-3xl mx-auto space-y-12">
+            <div class="text-center space-y-2">
+                <span class="text-xs uppercase tracking-widest font-semibold text-sage-700">Academic Background</span>
+                <h2 class="font-editorial text-4xl sm:text-5xl font-bold text-espresso-900">Education</h2>
+            </div>
+
+            <!-- Degree Card -->
+            <div class="bg-ivory-100 p-8 rounded-3xl border border-sage-200 space-y-6 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-sage-200/80 pb-6">
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-espresso-900">Bachelor of Engineering (B.E.)</h3>
+                        <p class="text-sage-800 text-sm font-semibold mt-1">Computer Science and Engineering</p>
+                    </div>
+                    <div class="text-left sm:text-right">
+                        <span class="inline-block px-3 py-1 bg-sage-200/60 rounded-full text-xs font-semibold text-sage-800">Bangalore, India</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3 text-espresso-900 font-medium text-base">
+                        <i class="fa-solid fa-building-columns text-sage-700"></i>
+                        <span>RV College of Engineering (RVCE)</span>
+                    </div>
+
+                    <p class="text-xs text-espresso-800/70 leading-relaxed">
+                        Enrolled in core computer science curriculum emphasizing hardware synthesis, advanced data structures, algorithmic design, system software, database management, and operating systems.
+                    </p>
+
+                    <div class="pt-2">
+                        <span class="text-xs font-semibold text-espresso-800 uppercase tracking-wider block mb-2">Key Coursework Covered:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-ivory-50 border border-sage-200 rounded-lg text-xs text-espresso-800">Data Structures & Algorithms</span>
+                            <span class="px-3 py-1 bg-ivory-50 border border-sage-200 rounded-lg text-xs text-espresso-800">Microcontrollers & Embedded IoT</span>
+                            <span class="px-3 py-1 bg-ivory-50 border border-sage-200 rounded-lg text-xs text-espresso-800">Object-Oriented Programming (C++/Java)</span>
+                            <span class="px-3 py-1 bg-ivory-50 border border-sage-200 rounded-lg text-xs text-espresso-800">Database Systems</span>
+                            <span class="px-3 py-1 bg-ivory-50 border border-sage-200 rounded-lg text-xs text-espresso-800">Operating Systems & Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CURRENT LEARNING & GOALS -->
+    <section id="goals" class="py-20 bg-ivory-100/70 border-y border-sage-200/80">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-xs uppercase tracking-widest font-semibold text-sage-700">Future Horizon</span>
+                    <h2 class="font-editorial text-4xl font-bold text-espresso-900">Current Learning & Goals</h2>
+                    <p class="text-xs text-espresso-800/70 leading-relaxed">
+                        Focused on expanding professional capabilities, seeking industry immersion, and mastering forward-looking computational frameworks.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="p-5 bg-ivory-50 rounded-2xl border border-sage-200 flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 shrink-0">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-sm text-espresso-900">Internship Opportunities</h4>
+                            <p class="text-xs text-espresso-800/70 mt-1">Seeking software engineering and embedded systems roles to apply coursework to production challenges.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-ivory-50 rounded-2xl border border-sage-200 flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 shrink-0">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-sm text-espresso-900">Hackathons & Ideathons</h4>
+                            <p class="text-xs text-espresso-800/70 mt-1">Actively participating in engineering hackathons (e.g., FAIRLENS, Yuva Yodha) to build rapid solution prototypes.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-ivory-50 rounded-2xl border border-sage-200 flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 shrink-0">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-sm text-espresso-900">Open-Source Hardware</h4>
+                            <p class="text-xs text-espresso-800/70 mt-1">Developing well-documented open-source hardware repositories for secondary safety applications.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-ivory-50 rounded-2xl border border-sage-200 flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-800 shrink-0">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-sm text-espresso-900">Advanced Algorithmic Mastery</h4>
+                            <p class="text-xs text-espresso-800/70 mt-1">Deepening mastery in competitive data structure optimization and quantum computing foundations.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & FOOTER -->
+    <section id="contact" class="bg-sage-800 text-ivory-50 pt-24 pb-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="max-w-3xl mx-auto text-center space-y-8 mb-20">
+                <span class="text-xs uppercase tracking-widest font-semibold text-gold-400">Get In Touch</span>
+                <h2 class="font-editorial text-5xl sm:text-6xl font-bold tracking-tight">Let's Build Something Meaningful</h2>
+                <p class="text-sm sm:text-base font-light text-ivory-200/80 leading-relaxed">
+                    Interested in collaborating, discussing technical ideas, or connecting about upcoming opportunities? I’d love to hear from you.
+                </p>
+
+                <!-- Email Action Box -->
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="mailto:nandithal6653@gmail.com" class="px-8 py-4 bg-gold-500 hover:bg-gold-600 text-espresso-900 text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-3">
+                        <i class="fa-solid fa-envelope text-base"></i>
+                        <span>nandithal6653@gmail.com</span>
+                    </a>
+                    
+                    <button onclick="copyEmail()" id="copyBtn" class="px-6 py-4 bg-sage-700/60 hover:bg-sage-700 text-ivory-100 border border-sage-600 text-xs font-semibold uppercase tracking-widest rounded-full transition-all duration-300 flex items-center space-x-2">
+                        <i class="fa-solid fa-copy"></i>
+                        <span id="copyBtnText">Copy Email</span>
+                    </button>
+                </div>
+
+                <!-- Social Links -->
+                <div class="pt-8 flex justify-center items-center space-x-6">
+                    <a href="https://github.com/nandithal2007" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-sage-700/50 hover:bg-gold-500 hover:text-espresso-900 text-ivory-100 flex items-center justify-center transition-all duration-300 border border-sage-600" aria-label="GitHub Profile">
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/nanditha-l-285426396" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-sage-700/50 hover:bg-gold-500 hover:text-espresso-900 text-ivory-100 flex items-center justify-center transition-all duration-300 border border-sage-600" aria-label="LinkedIn Profile">
+                        <i class="fa-brands fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="mailto:nandithal6653@gmail.com" class="w-12 h-12 rounded-full bg-sage-700/50 hover:bg-gold-500 hover:text-espresso-900 text-ivory-100 flex items-center justify-center transition-all duration-300 border border-sage-600" aria-label="Send Email">
+                        <i class="fa-solid fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Divider & Copyright -->
+            <div class="border-t border-sage-700/80 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory-300/60 space-y-4 sm:space-y-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-7 h-7 rounded-full border border-gold-400/40 flex items-center justify-center">
+                        <span class="font-editorial text-xs font-bold text-gold-400">NL</span>
+                    </div>
+                    <span>Nanditha L • RVCE Bangalore</span>
+                </div>
+                <p>© 2026 Nanditha L. All rights reserved.</p>
+                <p>Designed with clean editorial precision</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROJECT MODAL DETAIL DRAWER -->
+    <div id="projectModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <!-- Backdrop -->
+        <div onclick="closeProjectModal()" class="fixed inset-0 bg-espresso-900/60 backdrop-blur-sm modal-backdrop"></div>
+        
+        <!-- Modal Content Box -->
+        <div class="relative bg-ivory-50 rounded-3xl border border-sage-200 max-w-2xl w-full p-6 sm:p-8 shadow-2xl z-10 space-y-6 max-h-[90vh] overflow-y-auto">
+            
+            <div class="flex items-start justify-between border-b border-sage-200 pb-4">
+                <div>
+                    <span id="modalCategory" class="text-[10px] uppercase tracking-widest font-semibold text-sage-700 block">Category</span>
+                    <h3 id="modalTitle" class="font-serif text-2xl font-bold text-espresso-900 mt-1">Project Title</h3>
+                </div>
+                <button onclick="closeProjectModal()" class="w-8 h-8 rounded-full bg-ivory-200 text-espresso-800 hover:bg-sage-700 hover:text-ivory-50 flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <p id="modalDescription" class="text-xs sm:text-sm text-espresso-800/80 leading-relaxed">
+                    Detailed project summary.
+                </p>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs uppercase tracking-wider font-semibold text-espresso-900">Technical Specifications & Hardware:</h4>
+                    <ul id="modalTechList" class="space-y-1.5 text-xs text-espresso-800/70 list-disc list-inside bg-ivory-100 p-4 rounded-xl border border-sage-200">
+                    </ul>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs uppercase tracking-wider font-semibold text-espresso-900">Implementation Highlights:</h4>
+                    <p id="modalHighlights" class="text-xs text-espresso-800/70 leading-relaxed bg-ivory-100 p-4 rounded-xl border border-sage-200">
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-sage-200 flex justify-end">
+                <button onclick="closeProjectModal()" class="px-6 py-2.5 bg-sage-700 text-ivory-50 text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-sage-800 transition-colors">
+                    Close Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT & THREE.JS LOGIC -->
+    <script>
+        // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Copy Email to Clipboard Functionality
+        function copyEmail() {
+            const emailText = "nandithal6653@gmail.com";
+            
+            // Execute Copy Command
+            const tempInput = document.createElement("input");
+            tempInput.value = emailText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            // Update UI Button Feedback
+            const btnText = document.getElementById('copyBtnText');
+            btnText.innerText = "Copied to Clipboard!";
+            setTimeout(() => {
+                btnText.innerText = "Copy Email";
+            }, 2500);
+        }
+
+        // Project Modals Data
+        const projectData = {
+            1: {
+                title: "Smart Helmet with Secondary Accident Prevention",
+                category: "Embedded Systems / IoT Prototype",
+                description: "A functional hardware safety prototype built with ESP32 microcontroller architecture. The system monitors live vehicle motion vectors, calculates sudden impact deceleration thresholds, and automatically triggers telemetry emergency notifications.",
+                tech: [
+                    "ESP32 Microcontroller (Wi-Fi/Bluetooth & Dual-Core processing)",
+                    "MPU6050 6-Axis Accelerometer and Gyroscope Module",
+                    "NEO-6M GPS Receiver for precise geolocation logging",
+                    "SIM800L GSM Telemetry Module for automated SMS dispatch",
+                    "High-visibility embedded warning LEDs"
+                ],
+                highlights: "Tested with simulated motion impacts. Upon threshold breach, the ESP32 captures latitude and longitude coordinates and formats an emergency SMS with live map coordinates sent directly to designated emergency contacts."
+            },
+            2: {
+                title: "Air Filtration System & Environmental Monitor",
+                category: "Hardware / Environmental Sensors",
+                description: "Integrated micro-environmental monitoring system measuring ambient indoor temperature, humidity, and atmospheric particulate levels with real-time feedback.",
+                tech: [
+                    "Arduino Uno Microcontroller Unit",
+                    "DHT11 / DHT22 Precision Temperature & Relative Humidity Sensor",
+                    "Particulate / Air Quality Sensor Interfacing",
+                    "Compact DC Air Filtration & Fan Relay Unit"
+                ],
+                highlights: "Presents precise environmental readings on real-time serial display while toggling active filtration mechanisms based on environmental thresholds."
+            },
+            3: {
+                title: "Surplus Food Management System",
+                category: "Web Application / Social Impact Prototype",
+                description: "Web platform prototype designed to minimize commercial food waste by bridging banquet halls, university mess halls, and events with local non-profit distribution hubs.",
+                tech: [
+                    "Python Backend Logic & Matching Algorithms",
+                    "JavaScript, HTML5 & CSS3 Responsive UI",
+                    "Min-Heap Priority Queues for expiry time tracking",
+                    "Graph Representation for nearby NGO route mapping"
+                ],
+                highlights: "Utilizes structured data models to rank surplus food items based on shelf-life urgency and distance to receiving shelters."
+            },
+            4: {
+                title: "StudyBud & Personal Utility Web Apps",
+                category: "Software Tools & GUIs",
+                description: "A sleek desktop and web productivity application designed to streamline academic study sessions, tracking focus time and task completion.",
+                tech: [
+                    "Python & Tkinter Graphical User Interface",
+                    "JavaScript & LocalStorage Session Persistence",
+                    "Pomodoro Timer Logic & Analytics Module"
+                ],
+                highlights: "Features modular timers, task categorization, and subject-wise study analytics without relying on heavy external dependencies."
+            },
+            5: {
+                title: "Emerging Tech: Quantum Computing & Algorithmic Logic",
+                category: "Ongoing Learning & Research",
+                description: "An ongoing study into quantum mechanics principles as applied to computation, logic gate matrices, and linear algebra applications in modern CS.",
+                tech: [
+                    "Quantum Logic Gates (Hadamard, CNOT, Pauli-X/Y/Z)",
+                    "State Vector Representation & Superposition Concepts",
+                    "Python Computational Libraries & C++ Data Structure Implementations"
+                ],
+                highlights: "Focusing on algorithmic logic foundations, computational complexity limits, and quantum algorithm simulations."
+            }
+        };
+
+        function openProjectModal(id) {
+            const data = projectData[id];
+            if (!data) return;
+
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalCategory').innerText = data.category;
+            document.getElementById('modalDescription').innerText = data.description;
+            document.getElementById('modalHighlights').innerText = data.highlights;
+
+            const techList = document.getElementById('modalTechList');
+            techList.innerHTML = '';
+            data.tech.forEach(item => {
+                const li = document.createElement('li');
+                li.innerText = item;
+                techList.appendChild(li);
+            });
+
+            document.getElementById('projectModal').classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.add('hidden');
+        }
+
+        // THREE.JS 3D HERO CANVAS INITIALIZATION
+        window.onload = function() {
+            initThreeJS();
+        };
+
+        function initThreeJS() {
+            const container = document.getElementById('hero3dCanvas');
+            if (!container) return;
+
+            // Scene setup
+            const scene = new THREE.Scene();
+
+            // Camera setup
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(0, 1.5, 5);
+
+            // Renderer setup
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // Lighting Setup
+            const ambientLight = new THREE.AmbientLight(0xfcfbf7, 0.8);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xd4af37, 1.2); // Warm Champagne Gold Light
+            directionalLight.position.set(3, 5, 4);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 1024;
+            directionalLight.shadow.mapSize.height = 1024;
+            scene.add(directionalLight);
+
+            const softFillLight = new THREE.PointLight(0x708238, 0.6); // Subtle Sage Fill
+            softFillLight.position.set(-3, -1, 2);
+            scene.add(softFillLight);
+
+            // 3D Objects Group
+            const heroGroup = new THREE.Group();
+            scene.add(heroGroup);
+
+            // Materials
+            const sageMaterial = new THREE.MeshStandardMaterial({ color: 0x708238, roughness: 0.4, metalness: 0.1 });
+            const ivoryMaterial = new THREE.MeshStandardMaterial({ color: 0xefebe0, roughness: 0.6 });
+            const goldMaterial = new THREE.MeshStandardMaterial({ color: 0xd4af37, roughness: 0.2, metalness: 0.8 });
+            const darkMaterial = new THREE.MeshStandardMaterial({ color: 0x2b2927, roughness: 0.5 });
+
+            // 1. Stylized Minimal Laptop
+            const laptopGroup = new THREE.Group();
+            
+            // Base
+            const baseGeo = new THREE.BoxGeometry(1.6, 0.05, 1.1);
+            const baseMesh = new THREE.Mesh(baseGeo, darkMaterial);
+            baseMesh.castShadow = true;
+            laptopGroup.add(baseMesh);
+
+            // Screen
+            const screenGeo = new THREE.BoxGeometry(1.5, 0.95, 0.04);
+            const screenMesh = new THREE.Mesh(screenGeo, ivoryMaterial);
+            screenMesh.position.set(0, 0.5, -0.52);
+            screenMesh.rotation.x = -0.15;
+            screenMesh.castShadow = true;
+            laptopGroup.add(screenMesh);
+
+            laptopGroup.position.set(0, -0.2, 0);
+            laptopGroup.rotation.y = -0.3;
+            heroGroup.add(laptopGroup);
+
+            // 2. Stacked Books
+            const book1Geo = new THREE.BoxGeometry(0.9, 0.12, 0.7);
+            const book1 = new THREE.Mesh(book1Geo, sageMaterial);
+            book1.position.set(-1.1, -0.4, 0.2);
+            book1.rotation.y = 0.2;
+            book1.castShadow = true;
+            heroGroup.add(book1);
+
+            const book2 = new THREE.Mesh(book1Geo, ivoryMaterial);
+            book2.position.set(-1.1, -0.26, 0.22);
+            book2.rotation.y = -0.1;
+            book2.castShadow = true;
+            heroGroup.add(book2);
+
+            // 3. Floating Geometric Accent Spheres & Rings (Quantum/Tech motif)
+            const sphereGeo = new THREE.SphereGeometry(0.25, 32, 32);
+            const floatingSphere = new THREE.Mesh(sphereGeo, goldMaterial);
+            floatingSphere.position.set(1.2, 0.6, -0.2);
+            floatingSphere.castShadow = true;
+            heroGroup.add(floatingSphere);
+
+            const torusGeo = new THREE.TorusGeometry(0.45, 0.02, 16, 100);
+            const torusRing = new THREE.Mesh(torusGeo, goldMaterial);
+            torusRing.position.set(1.2, 0.6, -0.2);
+            torusRing.rotation.x = Math.PI / 3;
+            heroGroup.add(torusRing);
+
+            // 4. Plant Pot Element
+            const potGeo = new THREE.CylinderGeometry(0.2, 0.15, 0.35, 24);
+            const pot = new THREE.Mesh(potGeo, ivoryMaterial);
+            pot.position.set(1.1, -0.3, 0.5);
+            pot.castShadow = true;
+            heroGroup.add(pot);
+
+            const plantLeafGeo = new THREE.DodecahedronGeometry(0.22);
+            const plantLeaf = new THREE.Mesh(plantLeafGeo, sageMaterial);
+            plantLeaf.position.set(1.1, -0.05, 0.5);
+            heroGroup.add(plantLeaf);
+
+            // Mouse Interaction / Tilt
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetRotationX = 0;
+            let targetRotationY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                const windowHalfX = window.innerWidth / 2;
+                const windowHalfY = window.innerHeight / 2;
+                mouseX = (e.clientX - windowHalfX) / 1000;
+                mouseY = (e.clientY - windowHalfY) / 1000;
+            });
+
+            // Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Gentle Rotation
+                targetRotationY += (mouseX - targetRotationY) * 0.05;
+                targetRotationX += (mouseY - targetRotationX) * 0.05;
+
+                heroGroup.rotation.y = targetRotationY + Math.sin(Date.now() * 0.001) * 0.05;
+                heroGroup.rotation.x = targetRotationX;
+
+                // Subtle float animation
+                floatingSphere.position.y = 0.6 + Math.sin(Date.now() * 0.002) * 0.08;
+                torusRing.position.y = floatingSphere.position.y;
+                torusRing.rotation.z += 0.005;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                if (!container) return;
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+    </script>
+</body>
+</html>
